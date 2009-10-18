@@ -50,7 +50,7 @@ class ImageEventHandler(pyinotify.ProcessEvent):
         it is a new file."""
         # make sure we have seen this before
         if event.pathname in self._incoming:
-            self.resize(event)
+            self._resize(event)
             # finally remove the event from our state tracking dict
             del self._incoming[event.pathname]
 
@@ -61,17 +61,15 @@ class ImageEventHandler(pyinotify.ProcessEvent):
             self._incoming[event.pathname] = event
  
 
-    def resize(self, event):
-        
-        if not event.dir:
-            fullpath = event.pathname
-            fname = os.path.basename(fullpath)
-            resizer = imageutils.Resizer(fullpath)
-            for size in SIZES:
-                    outpath = os.path.join(event.path,
-                         directory_for_size(size),
-                         fname)
-                    resizer.resize(outpath, size)
+    def _resize(self, event):
+        fullpath = event.pathname
+        fname = os.path.basename(fullpath)
+        resizer = imageutils.Resizer(fullpath)
+        for size in SIZES:
+                outpath = os.path.join(event.path,
+                     directory_for_size(size),
+                     fname)
+                resizer.resize(outpath, size)
 
 
     def _prepareDirectories(self):
