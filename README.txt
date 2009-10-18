@@ -34,4 +34,4 @@ License: GPLv3 [2]
 --
 [0] http://trac.dbzteam.org/pyinotify
 [1] http://www.pythonware.com/products/pil/
-[2]  http://www.gnu.org/licenses/gpl-3.0.html
+[2] http://www.gnu.org/licenses/gpl-3.0.html
