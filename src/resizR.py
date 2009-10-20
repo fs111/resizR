@@ -10,14 +10,8 @@ import os
 import os.path
 import user
 import imageutils
-import user
-
-# this is where we store stuff
-BASEPATH = os.path.join(user.home, "resizR")
-
-# we will create these sizes
-SIZES = ((800, 600), (1024, 768), (1280, 1024), (1600, 1200))
-
+# this is where the config comes from 
+from configutils import USERCONFIG as CONFIG
 
 class ImageEventHandler(pyinotify.ProcessEvent):
     """Eventhandler for the directory we are monitoring. The class
@@ -33,7 +27,7 @@ class ImageEventHandler(pyinotify.ProcessEvent):
         """overwritten method from the pyinotify framework. __init__ cannot
         be overwritten according to the docs, so this is the way to initialize our own
         stuff"""
-        self.path = BASEPATH
+        self.path = CONFIG.BASEPATH
         
         self._incoming = {}
         self._prepareDirectories()
@@ -65,16 +59,16 @@ class ImageEventHandler(pyinotify.ProcessEvent):
         fullpath = event.pathname
         fname = os.path.basename(fullpath)
         resizer = imageutils.Resizer(fullpath)
-        for size in SIZES:
+        for size in CONFIG.SIZES:
                 outpath = os.path.join(event.path,
-                     directory_for_size(size),
-                     fname)
+                          directory_for_size(size),
+                          fname)
                 resizer.resize(outpath, size)
 
 
     def _prepareDirectories(self):
         """This method creates the resizR and all its subdirectories """
-        for size in SIZES:
+        for size in CONFIG.SIZES:
             dir = os.path.join(self.path, directory_for_size(size))
             if not (os.path.isdir(dir)):
                 os.makedirs(dir)
@@ -91,7 +85,7 @@ def main():
     """Yes, this is a main method, you guessed it right"""
     handler = ImageEventHandler()
     mgr = pyinotify.WatchManager()
-    mgr.add_watch(BASEPATH, pyinotify.ALL_EVENTS)
+    mgr.add_watch(CONFIG.BASEPATH, pyinotify.ALL_EVENTS)
     notifier = pyinotify.Notifier(mgr, handler)
     notifier.loop()
 
