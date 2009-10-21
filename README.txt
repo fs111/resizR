@@ -29,7 +29,7 @@ resizR/
 `-- foo.png
 
 It will also create a directory in your $HOME called .resizR with a file
-called config.py in it. In that file you can adjust the directory and the
+called resizRconfig.py in it. In that file you can adjust the directory and the
 sizes that resizR will use. 
 
 Author: André Kelpe <efeshundertelf at googlemail dot com>
