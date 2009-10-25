@@ -21,6 +21,9 @@ _CFG_TEMPLATE = """
 # this is where we store stuff
 BASEPATH = "~/resizR"
 
+# cleans up the directory every time resizR starts
+CLEAN_ON_START = False
+
 # we will create these sizes
 SIZES = ((800, 600), (1024, 768), (1280, 1024), (1600, 1200))
 """

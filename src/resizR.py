@@ -8,6 +8,7 @@ license: GPLv3
 import pyinotify
 import os
 import os.path
+import shutil
 import user
 import imageutils
 # this is where the config comes from 
@@ -30,7 +31,6 @@ class ImageEventHandler(pyinotify.ProcessEvent):
         self.path = CONFIG.BASEPATH
         
         self._incoming = {}
-        self._prepareDirectories()
 
     def process_default(self, event):
         """Handles all inotify events, but only reacts on two of them"""
@@ -56,6 +56,9 @@ class ImageEventHandler(pyinotify.ProcessEvent):
  
 
     def _resize(self, event):
+        """private method that is called to resize the image based
+        on the passed in event
+        """
         fullpath = event.pathname
         fname = os.path.basename(fullpath)
         resizer = imageutils.Resizer(fullpath)
@@ -66,10 +69,14 @@ class ImageEventHandler(pyinotify.ProcessEvent):
                 resizer.resize(outpath, size)
 
 
-    def _prepareDirectories(self):
+def prepareDirectories():
         """This method creates the resizR and all its subdirectories """
+        if CONFIG.CLEAN_ON_START:
+            if os.path.exists(CONFIG.BASEPATH):
+                shutil.rmtree(CONFIG.BASEPATH)
+
         for size in CONFIG.SIZES:
-            dir = os.path.join(self.path, directory_for_size(size))
+            dir = os.path.join(CONFIG.BASEPATH, directory_for_size(size))
             if not (os.path.isdir(dir)):
                 os.makedirs(dir)
 
@@ -81,14 +88,22 @@ def directory_for_size(fmt_tuple):
     return "%sx%s" % (fmt_tuple[0], fmt_tuple[1])
 
 
-def main():
-    """Yes, this is a main method, you guessed it right"""
+
+def start():
+    """starts the notification loop"""
     handler = ImageEventHandler()
     mgr = pyinotify.WatchManager()
     mgr.add_watch(CONFIG.BASEPATH, pyinotify.ALL_EVENTS)
     notifier = pyinotify.Notifier(mgr, handler)
     notifier.loop()
 
+
+
+def main():
+    """Yes, this is a main method, you guessed it right"""
+    prepareDirectories()
+    start()
+    
 
 if __name__ == "__main__":
     main()
