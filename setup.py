@@ -10,6 +10,7 @@ setup (name = 'resizR',
        version = '0.2', 
        packages = ['resizRmodules',],
        scripts = ["src/resizR"],
+       url = "http://github.com/fs111/resizR",
        package_dir = {'': 'src'}
        )
 
