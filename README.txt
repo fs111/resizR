@@ -2,7 +2,7 @@ resizR is a daemon written in python, which monitors the directory $HOME/resizR
 and automatically resizes all images copied into that directory to multiple
 sizes. It is based on pyinotify [0] and PIL [1].
 
-The first time you start it (resizR.py), it will create a directory structure like this:
+The first time you start it (resizR), it will create a directory structure like this:
 
 $ tree resizR/
 $HOME/resizR/
@@ -31,6 +31,10 @@ resizR/
 It will also create a directory in your $HOME called .resizR with a file
 called resizRconfig.py in it. In that file you can adjust the directory and the
 sizes that resizR will use. 
+
+You can run resizR from the checked out git repo or you can run the setup.py
+program to install it locally into /usr/bin + its modules in the site-packages
+directory of your python installation.
 
 Author: André Kelpe <efeshundertelf at googlemail dot com>
 License: GPLv3 [2]
