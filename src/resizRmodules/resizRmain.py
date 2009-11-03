@@ -103,7 +103,3 @@ def main():
     """Yes, this is a main method, you guessed it right"""
     prepareDirectories()
     start()
-    
-
-if __name__ == "__main__":
-    main()
