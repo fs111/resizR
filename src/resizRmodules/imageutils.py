@@ -8,6 +8,9 @@ class Resizer(object):
     """Simple class that uses the fine PIL library to resizes images"""
 
     def __init__(self, path):
+        """Constructs a new Resizer object with the given
+        path, which can then be used to resize and image."""
+
         self.image = Image.open(path)
         image_size = self.image.size
         # in case the images is 1200x1600 and not 1600x1200 we have to 
@@ -17,6 +20,8 @@ class Resizer(object):
 
 
     def resize(self, outpath, size):
+        """Resizes the image given in the constructor to the given size
+        argument and saves it at the given location"""
         if self.flip:
             size = size[1], size[0]
         resized = self.image.resize(size, Image.ANTIALIAS)
