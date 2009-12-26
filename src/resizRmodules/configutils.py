@@ -19,6 +19,7 @@ _CFG_TEMPLATE = """
 #!/usr/bin/env python
 # -*- coding: utf-8 
 # this is where we store stuff
+# note that only "~" is supported, environment variables will not be resolved
 BASEPATH = "~/resizR"
 
 # cleans up the directory every time resizR starts
