@@ -4,7 +4,7 @@
 configuration module for resizR.
 
 author: André Kelpe <efeshundertelf at googlemail dot com>
-license: GPLv3
+license: MIT
 """
 import user
 import os.path

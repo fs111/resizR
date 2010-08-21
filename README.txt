@@ -51,9 +51,8 @@ I hope you find it useful to some extend and if you change it, please send me
 patches!
 
 Author: André Kelpe <efeshundertelf at googlemail dot com>
-License: GPLv3 [2]
+License: MIT (see COPYING.txt)
 
 --
 [0] http://trac.dbzteam.org/pyinotify
 [1] http://www.pythonware.com/products/pil/
-[2] http://www.gnu.org/licenses/gpl-3.0.html

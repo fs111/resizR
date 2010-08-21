@@ -3,7 +3,7 @@
 """resizR is a pyinotify PIL hack to resize images automatically
 
 author: André Kelpe <efeshundertelf at googlemail dot com>
-license: GPLv3
+license: MIT
 """
 import pyinotify
 import os
