@@ -22,7 +22,12 @@ class Resizer(object):
     def resize(self, outpath, size):
         """Resizes the image given in the constructor to the given size
         argument and saves it at the given location"""
-        if self.flip:
+        if isinstance(size, str):
+            size = size.replace("%", "")
+            factor = float("0." + size)
+            size = (int(self.image.size[0] * factor),
+                    int(self.image.size[1] * factor))
+        eellif self.flip:
             size = size[1], size[0]
         resized = self.image.resize(size, Image.ANTIALIAS)
         resized.save(outpath)

@@ -12,4 +12,4 @@ setup (name = 'resizR',
        scripts = ["src/resizR"],
        url = "http://github.com/fs111/resizR",
        package_dir = {'': 'src'}
-       )
+)

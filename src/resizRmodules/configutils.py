@@ -26,6 +26,7 @@ BASEPATH = "~/resizR"
 CLEAN_ON_START = False
 
 # we will create these sizes
+# also supported are relative sizes like "25%" or "50%"
 SIZES = ((800, 600), (1024, 768), (1280, 1024), (1600, 1200))
 """
 # first make sure the directory and file are present
@@ -41,4 +42,4 @@ sys.path.insert(0, _CONFIG_DIR)
 import resizRconfig as USERCONFIG
 # and finally replace things like ~ for convinience of the user
 USERCONFIG.BASEPATH = os.path.expanduser(USERCONFIG.BASEPATH)
-
+50%

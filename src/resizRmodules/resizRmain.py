@@ -85,6 +85,8 @@ def directory_for_size(fmt_tuple):
     """small helper method that returns directory names for sizes.
     (800, 600) will become "800x600"
     """
+    if isinstance(fmt_tuple, str):
+        return fmt_tuple
     return "%sx%s" % (fmt_tuple[0], fmt_tuple[1])
 
 
