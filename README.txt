@@ -1,8 +1,11 @@
+resizR
+------
+
 resizR is a daemon written in python, which monitors the directory $HOME/resizR
-and automatically resizes all images copied into that directory to a
-configured, arbitrary list of sizes. It is based on pyinotify [0] and PIL [1].
-By default resizR creates a directory called "resizR" in your $HOME directory.
-This is configurable in the config file, which will be explained later.
+and automatically resizes all images copied into that directory to a configured,
+arbitrary list of sizes. It is based on pyinotify [0] and PIL [1].  By default
+resizR creates a directory called "resizR" in your $HOME directory.  This is
+configurable in the config file, which will be explained later.
 
 The first time you start it (resizR), it will create a directory structure like this:
 
@@ -13,8 +16,8 @@ $HOME/resizR/
 |-- 1600x1200
 `-- 800x600
 
-As soon as you copy a new image into the resizR directory it will create a resized image for
-all listed formats.
+As soon as you copy a new image into the resizR directory it will create a
+resized image for all listed formats.
 
 $ cp foo.png ~/resizR
 $ tree resizR/
@@ -29,17 +32,19 @@ resizR/
 |   `-- foo.png
 `-- foo.png
 
-Since the underlying technology uses the inotify facilities of the linux
-kernel, resizR will work with every program be it commandline or graphical.
+Next to the absolute sizes, resizR also supports relative sizes in percentage.
+In order to use that, adapt the config, with the sizes you like.
 
 resizR will also create a directory in your $HOME called .resizR with a file
 called resizRconfig.py in it. In that file you can adjust the directory and the
-sizes that it will use. Next to that you can also enable automatic cleaning of
-the resizR directory on startup. This setting is disabled by default. Please
-note that the config file is python code itself and resizR will execute
-anything in the global namespace of the config file on startup, so be sure what
-you are doing, if you change the file beyond the settings that are provided by
-default.
+sizes that it will use. By default only absolute sizes are listed, but relative
+sizes are also supported.
+
+Next to that you can also enable automatic cleaning of the resizR directory on
+startup. This setting is disabled by default. Please note that the config file
+is python code itself and resizR will execute anything in the global namespace
+of the config file on startup, so be sure what you are doing, if you change the
+file beyond the settings that are provided by default.
 
 You can run resizR from the checked out git repo or you can run the setup.py
 program to install it locally into /usr/bin + its modules in the site-packages
