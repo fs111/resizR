@@ -27,7 +27,7 @@ class Resizer(object):
             factor = float("0." + size)
             size = (int(self.image.size[0] * factor),
                     int(self.image.size[1] * factor))
-        eellif self.flip:
+        elif self.flip:
             size = size[1], size[0]
         resized = self.image.resize(size, Image.ANTIALIAS)
         resized.save(outpath)

@@ -42,4 +42,3 @@ sys.path.insert(0, _CONFIG_DIR)
 import resizRconfig as USERCONFIG
 # and finally replace things like ~ for convinience of the user
 USERCONFIG.BASEPATH = os.path.expanduser(USERCONFIG.BASEPATH)
-50%
