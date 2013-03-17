@@ -11,6 +11,8 @@ import os.path
 import shutil
 import user
 import imageutils
+import signal
+
 # this is where the config comes from 
 from configutils import USERCONFIG as CONFIG
 
@@ -91,17 +93,32 @@ def directory_for_size(fmt_tuple):
 
 
 
-def start():
-    """starts the notification loop"""
+
+class _(object):
+    notifier = None
+
+def create_notifier():
     handler = ImageEventHandler()
     mgr = pyinotify.WatchManager()
     mgr.add_watch(CONFIG.BASEPATH, pyinotify.ALL_EVENTS)
     notifier = pyinotify.Notifier(mgr, handler)
-    notifier.loop()
-
-
+    return notifier
+    
 
 def main():
     """Yes, this is a main method, you guessed it right"""
+    
     prepareDirectories()
-    start()
+    _.notifier = create_notifier()
+
+    def signal_handler(signum, frame):
+        _.notifier.stop()
+        prepareDirectories()
+        _.notifier = create_notifier()
+        _.notifier.loop()
+   
+    signal.signal(signal.SIGUSR1, signal_handler)
+
+    _.notifier.loop()
+
+
