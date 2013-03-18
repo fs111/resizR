@@ -49,7 +49,9 @@ file beyond the settings that are provided by default.
 To prevent your resizR directory from cluttering up, you can force resizR to
 clean it up while running, by sending SIGUSR1 to the python process. This will
 delete the entire resizR directory and recreate the directories for the
-different sizes.
+different sizes. The easiest way to do this, is some good old shell tools:
+
+$ kill -10 $(pdiof resizR)
 
 You can run resizR from the checked out git repo or you can run the setup.py
 program to install it locally into /usr/bin + its modules in the site-packages
